@@ -1,0 +1,30 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+
+  "files": {
+    "maxSize": 3000000,
+    "ignore": ["node_modules", "dist", "docs/.astro/**"]
+  },
+
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "useBlockStatements": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "warn",
+        "noUnusedVariables": "warn"
+      }
+    }
+  },
+
+  "formatter": {
+    "lineWidth": 120,
+    "indentStyle": "space"
+  }
+}
