@@ -6,29 +6,21 @@ import { hexToRgb } from '@layouts/utils'
 import BaseToast from '@/components/Base/BaseToast.vue'
 import { useLocalstorage } from '@/composables/useLocalstorage'
 const { syncInitialLoaderTheme, syncVuetifyThemeWithTheme: syncConfigThemeWithVuetifyTheme, isAppRtl, handleSkinChanges } = useThemeConfig()
-
+import Cookies from 'js-cookie';
 const { global } = useTheme()
+const router = useRouter()
 
-// const accessToken = useLocalstorage('accessToken')
-// const userData = useLocalstorage('userData')
-// // const router = useRouter()
+const logout = async () => {
+  Cookies.remove('token');
+  await router.push("/login");
+};
 
-// const logout = async () => {
-//   // Remove "accessToken" from localStorage
-//   localStorage.setItem('accessToken', '')
-
-//   // Remove "userData" from localStorage
-//   localStorage.setItem('userData', '')
-
-//   await router.push("/login")
-// }
-
-// onMounted(() => {
-//   if (!userData || !accessToken) logout()
-// })
-
-
-// ℹ️ Sync current theme with initial loader theme
+onMounted(() => {
+  const token = Cookies.get('token');
+  if (!token) {
+    logout();
+  }
+});
 syncInitialLoaderTheme()
 syncConfigThemeWithVuetifyTheme()
 handleSkinChanges()
@@ -36,7 +28,6 @@ handleSkinChanges()
 
 <template>
   <VLocaleProvider :rtl="isAppRtl">
-    <!-- ℹ️ This is required to set the background color of active nav link based on currently active global theme's primary -->
     <VApp :style="`--v-global-theme-primary: ${hexToRgb(global.current.value.colors.primary)}`">
       <BaseToast />
       <RouterView />

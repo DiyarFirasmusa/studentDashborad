@@ -5,17 +5,17 @@
       <VCol cols="12" md="6" v-for="(course, index) in courses" :key="index">
         <VCard>
           <VCol cols="12" align="center">
-            <VIcon size="48" color="primary">mdi-file</VIcon> 
+            <VIcon size="48" color="primary">tabler:layout-sidebar-left-expand-filled</VIcon> 
             <VDivider class="mt-4"></VDivider>
           </VCol>
 
           <VCol cols="12">
             <VCardSubtitle>اسم المقرر</VCardSubtitle>
-            <VCardTitle>{{ course.n }}</VCardTitle>
+            <VCardTitle :style="{ color: colors['on-surface'] }">{{ course.n }}</VCardTitle>
             <VCardSubtitle>رمز المقرر</VCardSubtitle>
-            <VCardTitle>{{ course.code }}</VCardTitle>
+            <VCardTitle :style="{ color: colors['on-surface'] }">{{ course.code }}</VCardTitle>
             <VCardSubtitle>نوع التسجيل على المادة</VCardSubtitle>
-            <VCardTitle>{{ course.registrationType }}</VCardTitle>
+            <VCardTitle :style="{ color: colors['on-surface'] }">{{ course.registrationType }}</VCardTitle>
             <VDivider class="mt-6"></VDivider>
             <VCardActions class="mt-4">
               <VBtn 
@@ -94,6 +94,7 @@
           </VList>
 
           <VDivider class="my-4" :style="{ backgroundColor: colors['border-color'] }" />
+          
 
           <!-- عدد المركب -->
         </VCardText>

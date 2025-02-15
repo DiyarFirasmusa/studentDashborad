@@ -11,8 +11,10 @@ import { VNodeRenderer } from '@layouts/components/VNodeRenderer';
 import { themeConfig } from '@themeConfig';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+// import axios from 'axios';
+import apiClient from '../Api/apiClient.js';
+import Cookies from 'js-cookie';
 import axios from 'axios';
-// import apiClient from '../Api/apiClient.js';
 // import authServices from '../Api/authServices.js';
 // import Cookies from 'js-cookie';
 
@@ -36,7 +38,7 @@ const router = useRouter();
 
 const login = async () => {
   try {
-    const response = await axios.post('http://foscsgks8cs48ssoowkgkg0c.194.163.168.91.sslip.io/api/Auth/login', {
+    const response = await apiClient.post('/Auth/login', {
       email: form.value.email,
       password: form.value.password,
     });
@@ -45,7 +47,8 @@ const login = async () => {
     const token = response.data.token;
 
     if (token) {
-      console.log(token)
+      Cookies.set('token', token);
+      router.push('/');
     } else {
       console.error('لم يتم استقبال التوكن!');
     }

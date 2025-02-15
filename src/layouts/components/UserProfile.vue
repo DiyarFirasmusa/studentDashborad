@@ -2,12 +2,11 @@
 import avatar1 from '@images/avatars/avatar-1.png'
 import { AuthStorageUtils } from '@/utils/auth-storage-utils'
 import { useRouter } from 'vue-router'
+import Cookies from 'js-cookie';
 
 const router = useRouter()
 const handleLogout = () => {
-  // Handle logout
-  AuthStorageUtils.removeAccessTokenFromLocalStorag()
-  // Redirect to login page
+  Cookies.remove('token')
   router.push('/login')
 }
 

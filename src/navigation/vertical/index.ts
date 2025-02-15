@@ -16,4 +16,9 @@ export default [
     to: { name: 'users' },
     icon: { icon: 'tabler:smart-home' },
   },
+  {
+    title: 'عن الحساب',
+    to: { name: 'aboutAccount' },
+    icon: { icon: 'tabler:smart-home' },
+  },
 ] as HorizontalNavItems;
