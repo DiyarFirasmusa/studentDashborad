@@ -15,7 +15,7 @@ const theme: VuetifyOptions['theme'] = {
       dark: false,
       colors: {
         'primary': "#312ECB",
-        'on-primary': '#fff',
+        'on-primary': '#000',
         'secondary': '#A8AAAE',
         'on-secondary': '#fff',
         'success': '#28C76F',
