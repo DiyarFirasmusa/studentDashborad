@@ -21,4 +21,9 @@ export default [
     to: { name: 'aboutAccount' },
     icon: { icon: 'tabler:smart-home' },
   },
+  {
+    title: 'المدرسين',
+    to: { name: 'teacher' },
+    icon: { icon: 'tabler:smart-home' },
+  },
 ] as HorizontalNavItems;
