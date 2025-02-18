@@ -45,8 +45,8 @@ const login = async () => {
     });
 
     // استخراج التوكن من الاستجابة
+    
     const token = response.data.token;
-
     if (token) {
       Cookies.set('token', token);
       router.push('/');
