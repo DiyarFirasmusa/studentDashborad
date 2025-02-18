@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-import { VDialog, VCard, VCardTitle, VCardText, VCardActions, VTextField, VRow, VCol, VBtn } from 'vuetify/components';
+import { defineProps, defineEmits, ref } from 'vue';
+import { VForm, VDialog, VCard, VCardTitle, VCardText, VCardActions, VTextField, VRow, VCol, VBtn } from 'vuetify/components';
+import { requiredValidator } from '@/@core/utils/validators';
 
 interface Course {
   n: string;
@@ -18,15 +19,18 @@ const emit = defineEmits<{
   (event: 'save', course: Course): void;
 }>();
 
+const formRef = ref<VForm | null>(null); // 🔥 مرجع لنموذج الـ VForm
+
 const closeDialog = () => {
   emit('update:modelValue', false);
 };
 
-const saveChanges = () => {
-  if (props.course) {
+const saveChanges = async () => {
+  const { valid } = await formRef.value!.validate(); // 🔥 التحقق يدويًا عند الحفظ
+  if (valid && props.course) {
     emit('save', { ...props.course });
+    closeDialog();
   }
-  closeDialog();
 };
 </script>
 
@@ -35,17 +39,19 @@ const saveChanges = () => {
     <VCard>
       <VCardTitle>تعديل بيانات المادة</VCardTitle>
       <VCardText>
-        <VRow dense>
-          <VCol cols="12">
-            <VTextField v-model="course!.n" label="اسم المادة" required />
-          </VCol>
-          <VCol cols="12">
-            <VTextField v-model="course!.code" label="كود المادة" required />
-          </VCol>
-          <VCol cols="12">
-            <VTextField v-model="course!.registrationType" label="نوع التسجيل" required />
-          </VCol>
-        </VRow>
+        <VForm ref="formRef">  <!-- 🔥 استخدم ref بدلاً من v-model -->
+          <VRow dense>
+            <VCol cols="12">
+              <VTextField v-model="course!.n" label="اسم المادة" :rules="[requiredValidator]" />
+            </VCol>
+            <VCol cols="12">
+              <VTextField v-model="course!.code" label="كود المادة" :rules="[requiredValidator]" />
+            </VCol>
+            <VCol cols="12">
+              <VTextField v-model="course!.registrationType" label="نوع التسجيل" :rules="[requiredValidator]" />
+            </VCol>
+          </VRow>
+        </VForm>
       </VCardText>
       <VCardActions>
         <VBtn color="green" @click="saveChanges">حفظ</VBtn>

@@ -5,6 +5,9 @@ import { VBtn, VIcon } from 'vuetify/components'
 import { Student, Header } from './type'
 import EditStudentDialog from '../../views/student/base/baseDialog.vue'
 import router from '@/router'
+import { useTheme } from 'vuetify/lib/framework.mjs'
+const { global } = useTheme();
+const colors = computed(() => global.current.value.colors);
 
 const headers: Header[] = [
   { title: 'الاسم الأول', key: 'first_name' },
@@ -62,9 +65,9 @@ const addNewStudent = () => {
 
 <template>
   <div>
-    <VBtn color="primary" block @click="addNewStudent()">إضافة طالب جديد</VBtn>
-    <VDataTable class="mt-6" :headers="headers" :items="items" :items-per-page="5">
-      <template #[`item.actions`]="{ item }">
+    <VBtn  color="primary" block @click="addNewStudent()"><span class="headline" :style="{color: colors['on-secondary']}">اضافة طالب جديد</span></VBtn>
+    <VDataTable class="mt-6" :headers="headers" :items="items" :items-per-page="5" >
+      <template #[`item.actions`]="{ item }" >
         <VBtn icon size="x-small" color="red" variant="text" @click="deleteRow(item.raw.id)">
           <VIcon size="22" icon="tabler-trash" />
         </VBtn>
@@ -77,3 +80,10 @@ const addNewStudent = () => {
     <EditStudentDialog v-model="dialog" :student="editedStudent" @save="saveEdit" />
   </div>
 </template>
+
+<style>
+.headline {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+</style>

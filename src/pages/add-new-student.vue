@@ -10,36 +10,36 @@
           <VForm v-model="vild" ref="form" @submit.prevent="submitForm">
             <VRow>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.name1" label="الاسم الأول لطالب" :rules="rules" required></VTextField>
+                <VTextField v-model="data.name1" label="الاسم الأول لطالب" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.name2" label="الاسم الثاني لطالب" :rules="rules" required></VTextField>
+                <VTextField v-model="data.name2" label="الاسم الثاني لطالب" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.name3" label="الاسم الثالث لطالب" :rules="rules" required></VTextField>
+                <VTextField v-model="data.name3" label="الاسم الثالث لطالب" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.name4" label="الاسم الرابع لطالب" :rules="rules" required></VTextField>
+                <VTextField v-model="data.name4" label="الاسم الرابع لطالب" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.institution" label="اسم المؤسسة" :rules="rules" required></VTextField>
+                <VTextField v-model="data.institution" label="اسم المؤسسة" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.collegeName" label="اسم الجامعة" :rules="rules" required></VTextField>
+                <VTextField v-model="data.collegeName" label="اسم الجامعة" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.departmentName" label="اسم القسم" :rules="rules" required></VTextField>
+                <VTextField v-model="data.departmentName" label="اسم القسم" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12" md="6">
-                <VTextField v-model="data.typeStudey" label="نوع الدراسة" :rules="rules" required></VTextField>
+                <VTextField v-model="data.typeStudey" label="نوع الدراسة" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol cols="12">
-                <VTextField v-model="data.level" label="المستوى" :rules="rules" required></VTextField>
+                <VTextField v-model="data.level" label="المستوى" :rules=[requiredValidator] ></VTextField>
               </VCol>
               <VCol  cols="12" class="d-flex gap-2 mt-4">
-                <VBtn type="submit" color="primary">إرسال</VBtn>
+                <VBtn type="submit" color="primary" > <span :style="{color: colors['on-secondary']}">ارسال</span> </VBtn>
                 <VBtn color="secondary" variant="outlined" class="px-6 py-3" @click="() => router.push('/student')">
-                  رجوع
+                  <span :style="{color: colors['on-primary']}">رجوع</span>
                 </VBtn>
               </VCol>
             </VRow>
@@ -53,7 +53,10 @@
 <script setup>
 import { ref } from 'vue';
 import router from '@/router';
-
+import { useTheme } from 'vuetify/lib/framework.mjs';
+const { global } = useTheme();
+const colors = computed(() => global.current.value.colors);
+import { emailValidator, passwordValidator, requiredValidator } from  '../@core/utils/validators';
 
 const data = ref({
   name1: '',
@@ -68,12 +71,13 @@ const data = ref({
 });
 const vild = ref(false);
 
-const rules = [v => !!v || 'هذا الحقل مطلوب'];
-
 const submitForm = () => {
   if (vild.value) {
     console.log(data.value.collegeName);
     router.push('/student');
   }
 };
+
+
+
 </script>

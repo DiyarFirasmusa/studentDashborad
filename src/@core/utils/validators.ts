@@ -3,9 +3,9 @@ import { isEmpty, isEmptyArray, isNullOrUndefined } from './index'
 // 👉 Required Validator
 export const requiredValidator = (value: unknown) => {
   if (isNullOrUndefined(value) || isEmptyArray(value) || value === false)
-    return 'This field is required'
+    return 'هذا الحقل مطلوب'
 
-  return !!String(value).trim().length || 'This field is required'
+  return !!String(value).trim().length || 'هذا حقل مطلوب'
 }
 
 // 👉 Email Validator
@@ -16,9 +16,9 @@ export const emailValidator = (value: unknown) => {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   if (Array.isArray(value))
-    return value.every(val => re.test(String(val))) || 'The Email field must be a valid email'
+    return value.every(val => re.test(String(val))) || 'يجب ان يكون الايمل صالح '
 
-  return re.test(String(value)) || 'The Email field must be a valid email'
+  return re.test(String(value)) || 'يجب ان يكون ايميل صالح'
 }
 
 // 👉 Password Validator
@@ -30,7 +30,8 @@ export const passwordValidator = (password: string) => {
   return (
     // eslint-disable-next-line operator-linebreak
     validPassword ||
-    'Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars'
+    "يجب ان يكون يحتوي على الاقل حرف كبير وحرف صغير ورقم ورمز خاص ويكون اكثر من 8 احرف"
+    
   )
 }
 

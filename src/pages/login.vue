@@ -9,6 +9,7 @@ import authV2MaskDark from '@images/pages/misc-mask-dark.png';
 import authV2MaskLight from '@images/pages/misc-mask-light.png';
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer';
 import { themeConfig } from '@themeConfig';
+import { emailValidator,passwordValidator } from  '@core/utils/validators.js';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 // import axios from 'axios';
@@ -57,6 +58,7 @@ const login = async () => {
   }
 };
 
+
 </script>
 
 <template>
@@ -101,6 +103,7 @@ const login = async () => {
                   v-model="form.email"
                   label="Email"
                   type="email"
+                  :rules="[emailValidator]"
                   placeholder="ادخل البريد الالكتروني"
                   autofocus
                 />
@@ -110,6 +113,7 @@ const login = async () => {
                 <AppTextField
                   v-model="form.password"
                   label="Password"
+                  :rules="[passwordValidator]"
                   placeholder="ادخل كلمة المرور"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :append-inner-icon="

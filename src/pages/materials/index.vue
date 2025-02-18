@@ -1,22 +1,25 @@
 <template>
   <div>
-    <VBtn color="primary" class="mb-4 " block @click="addNewCourse()">
+    <VBtn color="primary" class="mb-6 " block @click="addNewCourse()">
       <p class="headline mt-4" :style="{color: colors['on-success']}">اضافة مادة جديدة</p>
     </VBtn>
     <VRow>
-      <VCol cols="12" md="6" v-for="(course, index) in courses" :key="index">
+      <VCol cols="12" md="4" v-for="(course, index) in courses" :key="index">
         <VCard>
           <VCol cols="12" align="center">
-            <VIcon size="48" color="primary">tabler:layout-sidebar-left-expand-filled</VIcon> 
-            <VDivider class="mt-4"></VDivider>
+            <VAvatar color="primary" size="54">
+              <VIcon size="30" color="white">tabler:layout-sidebar-left-expand-filled</VIcon>
+            </VAvatar>
+            <VDivider class="mt-6"></VDivider>
           </VCol>
 
+
           <VCol cols="12">
-            <VCardSubtitle>اسم المقرر</VCardSubtitle>
+            <VCardSubtitle :style="{ color: colors['secondary'] }">اسم المقرر</VCardSubtitle>
             <VCardTitle :style="{ color: colors['on-primary'] }">{{ course.n }}</VCardTitle>
-            <VCardSubtitle>رمز المقرر</VCardSubtitle>
+            <VCardSubtitle :style="{ color: colors['secondary'] }">رمز المقرر</VCardSubtitle>
             <VCardTitle :style="{ color: colors['on-primary'] }">{{ course.code }}</VCardTitle>
-            <VCardSubtitle>نوع التسجيل على المادة</VCardSubtitle>
+            <VCardSubtitle :style="{ color: colors['secondary'] }">نوع التسجيل على المادة</VCardSubtitle>
             <VCardTitle :style="{ color: colors['on-primary'] }">{{ course.registrationType }}</VCardTitle>
             <VDivider class="mt-6"></VDivider>
             <VCardActions class="mt-4">
@@ -80,6 +83,7 @@ import ResaultCourseDialog from '@/views/materials/base/baseResaultCourseDialog.
 const { global } = useTheme();
 const courses = ref([
   { n: "مادة 1", code: 'C101', registrationType: 'اجباري' },
+  { n: "مادة 2", code: 'C102', registrationType: 'اختياري' },
   { n: "مادة 2", code: 'C102', registrationType: 'اختياري' }
 ]);
 
@@ -124,7 +128,7 @@ const openResultsDialog = (index) => {
 
 <style scoped>
 .headline {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
   padding: 16px;

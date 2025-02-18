@@ -1,29 +1,24 @@
 <template>
     <VListItem class="pa-0 " >
-        <VBtn
-            width="100%"
-            color="none"
-            variant="text"
-            @click="toggleQuizzes"
-            class="d-flex justify-start"
-        >
-            <VListItemTitle :style="{ color: colors['background'] }">{{ props.title }}</VListItemTitle>
+        <div @click="toggleQuizzes" class="d-flex pa-4">
+            <VListItemTitle style="font-weight: 500;"  :style="{ color: colors['grey-600'] }">{{ props.title }}</VListItemTitle>
+            <VSpacer />
             <VIcon>{{ quizzesExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</VIcon>
-        </VBtn>
+        </div>
         <VExpandTransition class="pa-5" >
             <div v-if="quizzesExpanded" :style="{backgroundColor: colors['background']}">
-                <VCard  class="custom-card pa-4"  >
+                <VCard class="custom-card pa-3 no-background-with-border">
                     <VRow align="center">
                     <VCol cols="12">
-                        <h3 class="headline font-weight-bold text-white">التقييم : 1</h3>
+                        <h3 :style="{color: colors['on-primary']}" class="headline font-weight-bold">التقييم  1:</h3>
                     </VCol>
-                    <VCol cols="12"  class="d-flex align-center">
-                        <span class="text-white text-caption font-weight-bold">15.0 / </span>
-                        <span class="score">12</span>
+                    <VCol cols="12" class="d-flex align-center">
+                        <span style="font-size: 1.5rem;">15.0/</span>
+                        <span class="">12.0</span>
                     </VCol>
-                    <VCol class="d-flex" cols="6" md="3">
-                        <VChip class="custom-chip">2024</VChip>
-                        <VChip class="custom-chip">اخلاص</VChip>
+                    <VCol class="d-flex " cols="12" >
+                        <div class="custom-card card ml-4"><h1>w</h1></div>
+                        <div class="custom-card card"><h1>2</h1></div>
                     </VCol>
                     </VRow>
                 </VCard>
@@ -48,3 +43,20 @@
         title: String,
     })
 </script>
+<style>
+.custom-card {
+  background-color: transparent !important;
+  border: 1px solid #ccc; /* يمكن تغيير اللون إلى اللون المطلوب */
+  border-radius: 8px; /* لتحديد الحواف المدورة */
+}
+
+.no-background-with-border {
+  background-color: transparent !important; /* إزالة الخلفية */
+  border: 1px solid #ccc; /* إضافة الحدود */
+}
+
+.card {
+    width: 150px;
+}
+
+</style>

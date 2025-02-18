@@ -1,7 +1,7 @@
 <template>
   <div>
     <VCard class="mx-auto" min-width="400" :style="{ color: colors['on-background'] }">
-      <VCardTitle class="pa-3 mb-6" color="primary" :style="{ backgroundColor: colors.primary, color: colors['on-primary'] }">
+      <VCardTitle class="pa-3 mb-6" color="primary" :style="{ backgroundColor: colors.primary, color: colors['on-secondary'] }">
         <span class="headline">بيانات الطالب</span>
       </VCardTitle>
       <VCardText>
@@ -76,16 +76,12 @@
     </VCard>
   </div>
 </template>
-
 <script setup>
 import { useTheme } from 'vuetify';
 import { computed } from 'vue';
-import { useThemeConfig } from '@/@core/composable/useThemeConfig';
-
 const { global } = useTheme();
 const colors = computed(() => global.current.value.colors);
 </script>
-
 <style scoped>
 .custom-text-field :deep(.v-label) {
   color: white !important;
