@@ -49,7 +49,7 @@ const login = async () => {
     const token = response.data.token;
     if (token) {
       Cookies.set('token', token);
-      router.push('/');
+      router.push('/student');
     } else {
       console.error('لم يتم استقبال التوكن!');
     }
