@@ -90,31 +90,40 @@ const data = ref({
 import apiClient from '../Api/apiClient.js'
 const vild = ref(false);
 
-const submitForm = async  () => {
+const submitForm = async () => {
   if (vild.value) {
     try {
-      const expectedData = {
-      firstName: data.value.firstName,
-      secondName: data.value.secondName,
-      thirdName: data.value.thirdName,
-      lastName: data.value.lastName,
-      theTitle: data.value.theTitle,
-      phoneNumber: data.value.phoneNumber,
-      university: data.value.university,
-      collage: data.value.collage,
-      department: data.value.department,
-      programStudy: data.value.programStudy,
-      level: data.value.level,
-      typeOfStudy: data.value.typeOfStudy,
-      academicDivision: data.value.academicDivision,
-      image: null
-    };
-      const response = await apiClient.post('/students' , expectedData)
+      const formData = new FormData();
+      formData.append("FirstName", data.value.firstName);
+      formData.append("SecondName", data.value.secondName);
+      formData.append("ThirdName", data.value.thirdName);
+      formData.append("LastName", data.value.lastName);
+      formData.append("TheTitle", data.value.theTitle);
+      formData.append("PhoneNumber", data.value.phoneNumber);
+      formData.append("University", data.value.university);
+      formData.append("Collage", data.value.collage); // Check if this should be "College"
+      formData.append("Department", data.value.department);
+      formData.append("ProgramStudy", data.value.programStudy);
+      formData.append("Level", data.value.level);
+      formData.append("TypeOfStudy", data.value.typeOfStudy);
+      formData.append("AcademicDivision", data.value.academicDivision);
+
+      // Check if an image is selected before appending
+      if (data.value.image) {
+        formData.append("Image", data.value.image);
+      }
+
+      const response = await apiClient.post("/students", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
       console.log(response.data); // Handle the response as needed
       // router.push('/student');
     } catch (error) {
-      console.error('Error submitting form:', error);
-    }  
+      console.error("Error submitting form:", error.response?.data || error);
+    }
   }
 };
 

@@ -102,47 +102,50 @@ const saveEdit = async (updatedStudent: Student) => {
   try {
     const { id, ...studentData } = updatedStudent;
 
-    const expectedData = {
-      firstName: updatedStudent.firstName?.trim() || "",
-      secondName: updatedStudent.secondName?.trim() || "",
-      thirdName: updatedStudent.thirdName?.trim() || "",
-      lastName: updatedStudent.lastName?.trim() || "",
-      theTitle: updatedStudent.theTitle?.trim() || "",
-      phoneNumber: updatedStudent.phoneNumber ? Number(updatedStudent.phoneNumber) : 0, // التأكد من صحة الرقم
-      university: updatedStudent.university?.trim() || "",
-      collage: updatedStudent.collage?.trim() || "",
-      department: updatedStudent.department?.trim() || "",
-      programStudy: updatedStudent.programStudy?.trim() || "",
-      typeOfStudy: updatedStudent.typeOfStudy?.trim() || "",
-      level: updatedStudent.level?.trim() || "",
-      academicDivision: updatedStudent.academicDivision?.trim() || "",
-    };
+    // إنشاء FormData
+    const formData = new FormData();
 
-    console.log("📌 البيانات النهائية قبل الإرسال:", JSON.stringify(expectedData, null, 2));
+    // إضافة البيانات النصية إلى FormData
+    formData.append("firstName", updatedStudent.firstName?.trim() || "");
+    formData.append("secondName", updatedStudent.secondName?.trim() || "");
+    formData.append("thirdName", updatedStudent.thirdName?.trim() || "");
+    formData.append("lastName", updatedStudent.lastName?.trim() || "");
+    formData.append("theTitle", updatedStudent.theTitle?.trim() || "");
+    formData.append("phoneNumber", updatedStudent.phoneNumber ? String(updatedStudent.phoneNumber) : "0"); // تأكد من أن الرقم هو نص
+    formData.append("university", updatedStudent.university?.trim() || "");
+    formData.append("collage", updatedStudent.collage?.trim() || "");
+    formData.append("department", updatedStudent.department?.trim() || "");
+    formData.append("programStudy", updatedStudent.programStudy?.trim() || "");
+    formData.append("typeOfStudy", updatedStudent.typeOfStudy?.trim() || "");
+    formData.append("level", updatedStudent.level?.trim() || "");
+    formData.append("academicDivision", updatedStudent.academicDivision?.trim() || "");
 
-    // إرسال الطلب مع التحقق من Headers
+    console.log("📌 البيانات النهائية قبل الإرسال:", formData);
+
     const response = await apiClient.put(
       `/students/${String(editId.value)}`,
-      expectedData,
-      { headers: { "Content-Type": "application/json" } }
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
     );
+
     console.log("✅ تم تعديل الطالب بنجاح!");
     dialog.value = false;
+    fetchStudents()
     
   } catch (error) {
-  console.error("❌ خطأ أثناء تعديل الطالب:", error);
+    console.error("❌ خطأ أثناء تعديل الطالب:", error);
 
-  if (error instanceof AxiosError) {
-    console.error("🔹 استجابة السيرفر:", error.response);
-    console.error("🔹 كود الخطأ:", error.response?.status);
-    console.error("🔹 نص الخطأ:", error.response?.statusText);
-    console.error("🔹 تفاصيل الخطأ:", error.response?.data);
-  } else {
-    console.error("❗ خطأ غير متوقع:", error);
+    if (error instanceof AxiosError) {
+      console.error("🔹 استجابة السيرفر:", error.response);
+      console.error("🔹 كود الخطأ:", error.response?.status);
+      console.error("🔹 نص الخطأ:", error.response?.statusText);
+      console.error("🔹 تفاصيل الخطأ:", error.response?.data);
+    } else {
+      console.error("❗ خطأ غير متوقع:", error);
+    }
   }
-}
-
 };
+
 
 
 
