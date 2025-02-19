@@ -68,7 +68,7 @@ import router from '@/router';
 import { useTheme } from 'vuetify/lib/framework.mjs';
 const { global } = useTheme();
 const colors = computed(() => global.current.value.colors);
-import { emailValidator, passwordValidator, requiredValidator } from  '../@core/utils/validators';
+import { requiredValidator } from  '../@core/utils/validators';
 
 const data = ref({
   firstName: '',
@@ -118,6 +118,7 @@ const submitForm = async () => {
           "Content-Type": "multipart/form-data"
         }
       });
+      router.push('/student')
 
       console.log(response.data); // Handle the response as needed
       // router.push('/student');
