@@ -31,38 +31,50 @@ const saveChanges = async () => {
 </script>
 
 <template>
-  <VDialog :model-value="modelValue" max-width="600px" @update:modelValue="$emit('update:modelValue', $event)">
+  <VDialog :model-value="modelValue" max-width="600px" @update:modelValue="$emit('update:modelValue', $event)" persistent>
     <VCard>
       <VCardTitle>تعديل بيانات الطالب</VCardTitle>
       <VCardText>
         <VForm ref="formRef" @submit.prevent="saveChanges">
           <VRow dense>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.first_name" label="الاسم الأول" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.firstName" label="الاسم الأول" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.middle_name" label="الاسم الثاني" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.secondName" label="الاسم الثاني" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.last_name" label="الاسم الثالث" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.thirdName" label="الاسم الثالث" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.nickname" label="الاسم الرابع" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.lastName" label="الاسم الرابع" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.institution" label="المؤسسة" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.theTitle" label="اللقب" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.college" label="الكلية" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.phoneNumber" label="رقم الهاتف" :rules="[requiredValidator]" />
+            </VCol>
+            <VCol cols="12" md="6">
+              <VTextField v-model="student!.university" label="المؤسسة" :rules="[requiredValidator]" />
+            </VCol>
+            <VCol cols="12" md="6">
+              <VTextField v-model="student!.collage" label="الكلية" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
               <VTextField v-model="student!.department" label="القسم" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
-              <VTextField v-model="student!.study_type" label="نوع الدراسة" :rules="[requiredValidator]" />
+              <VTextField v-model="student!.typeOfStudy" label="نوع الدراسة" :rules="[requiredValidator]" />
+            </VCol>
+            <VCol cols="12" md="6">
+              <VTextField v-model="student!.programStudy" label="البرنامج الدراسي" :rules="[requiredValidator]" />
             </VCol>
             <VCol cols="12" md="6">
               <VTextField v-model="student!.level" label="المستوى" :rules="[requiredValidator]" />
+            </VCol>
+            <VCol cols="12" md="6">
+              <VTextField v-model="student!.academicDivision" label="الشعبة الدراسية" :rules="[requiredValidator]" />
             </VCol>
           </VRow>
         </VForm>

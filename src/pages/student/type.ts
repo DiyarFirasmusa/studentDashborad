@@ -1,14 +1,18 @@
 export interface Student {
     id: number
-    first_name: string
-    middle_name: string
-    last_name: string
-    nickname: string
-    institution: string
-    college: string
+    firstName: string
+    secondName: string
+    thirdName: string
+    lastName: string
+    theTitle: string
+    phoneNumber: number
+    university: string
+    collage: string
     department: string
-    study_type: string
+    programStudy: string
+    typeOfStudy: string
     level: string
+    academicDivision: string
   }
   
   export interface Header {

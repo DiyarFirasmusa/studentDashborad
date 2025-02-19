@@ -28,6 +28,7 @@ const { appRouteTransition } = useThemeConfig()
         </h1>
       </RouterLink>
       <VSpacer />
+      <h1>hello</h1>
 
       <NavbarThemeSwitcher class="me-2" />
       <UserProfile />
