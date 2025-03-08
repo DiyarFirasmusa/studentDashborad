@@ -47,8 +47,12 @@ const login = async () => {
     // استخراج التوكن من الاستجابة
     
     const token = response.data.token;
+    const userType = response.data.userType 
+    console.log(userType)
+
     if (token) {
       Cookies.set('token', token);
+      Cookies.set('userType', userType);
       router.push('/student');
     } else {
       console.error('لم يتم استقبال التوكن!');

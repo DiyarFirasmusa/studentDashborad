@@ -11,11 +11,15 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const token = Cookies.get('token'); 
+  const userType = Cookies.get('userType'); // احصل على نوع المستخدم من الكوكيز
 
   if (to.meta.requiresAuth) {
-    const token = Cookies.get('token'); 
     if (!token) {
-      next({ name: 'Login' }); 
+      console.log('hel')
+      next({ name: 'Login' });
+    } else if (true) {
+      console.log('hello')
     } else {
       next();
     }
